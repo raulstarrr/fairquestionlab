@@ -83,6 +83,13 @@ section h2{font-size:clamp(40px,5vw,72px)}
 .mini{transform-origin:var(--ox,50%) var(--oy,50%);transition:transform .28s cubic-bezier(.2,.9,.3,1.2),box-shadow .28s,filter .25s}
 .mini:hover,.mini:focus-visible{transform:scale(var(--hs,1.25)) rotate(calc(var(--r)*-1 + 1.2deg));box-shadow:0 14px 16px -8px rgba(0,0,0,.55),0 3px 5px rgba(0,0,0,.2);z-index:4;outline:none}
 .mini:focus-visible{box-shadow:0 0 0 2px #fff8e8,0 0 0 4px #5B3DB8,0 14px 16px -8px rgba(0,0,0,.55)}
+/* the grown card must not catch the pointer outside its resting spot, or it hides the neighbour it overlaps (owner, 10 Nov:
+   Everest only reacted at one corner): while hovered, only an ::after undoing the hover transform (= the resting footprint) is hit */
+@media (hover:hover){
+  .mini::after{content:"";position:absolute;inset:0;transform-origin:var(--ox,50%) var(--oy,50%);transition:transform .28s cubic-bezier(.2,.9,.3,1.2)}
+  .mini:hover{pointer-events:none}
+  .mini:hover::after{pointer-events:auto;transform:rotate(calc(var(--r) - 1.2deg)) scale(calc(1 / var(--hs,1.25)))}
+}
 .cork:hover .mini:not(:hover),.cork:focus-within .mini:not(:focus-visible){filter:brightness(.72) saturate(.75)}
 .corktag{position:absolute;z-index:5;left:var(--tx,0);top:var(--ty,0);width:max-content;max-width:94%;margin:0;padding:6px 9px 7px;background:#fff8e8;color:#2b2118;
   box-shadow:0 6px 10px -5px rgba(0,0,0,.5);border-left:4px solid #d6452f;rotate:-1deg;opacity:0;pointer-events:none;transition:opacity .18s;
@@ -525,18 +532,20 @@ html:not(.js) .vbox video{display:none}
 }
 
 /* 10 Nov (owner, live feedback): "click a card" notes, the phone board (6 small polaroids + See all), phone hero and menu */
-.corkhint{position:absolute;left:65.4%;top:37%;margin:0;padding:.3em .7em .4em;font:600 max(16px,calc(var(--sw)*.0108))/1 Caveat,cursive;color:#2b2118;background:#fff8e8;rotate:2.2deg;box-shadow:0 5px 10px -5px rgba(0,0,0,.45);white-space:nowrap}
+.corkhint{position:absolute;z-index:2;left:65.6%;bottom:calc(100% - 9.9%);margin:0;padding:.3em .7em .4em;font:600 max(16px,calc(var(--sw)*.0108))/1 Caveat,cursive;color:#2b2118;background:#fff8e8;rotate:2.2deg;box-shadow:0 5px 10px -5px rgba(0,0,0,.45);white-space:nowrap}
 .corkhint::before,.boardhint::before{content:"";position:absolute;top:-6px;left:50%;width:11px;height:11px;margin-left:-5px;border-radius:50%;background:#d6452f;box-shadow:0 2px 2px rgba(0,0,0,.35)}
-.boardhint{position:absolute;z-index:3;left:calc(5vw + 30px);top:calc(4svh + 112px);margin:0;padding:8px 14px 9px;background:#fff8e8;color:#2b2118;font:600 25px/1 Caveat,cursive;rotate:2deg;box-shadow:0 6px 12px -6px rgba(0,0,0,.5)}
+.boardhint{position:absolute;z-index:3;left:calc(5vw + 345px);top:calc(4svh + 52px);margin:0;padding:8px 14px 9px;background:#fff8e8;color:#2b2118;font:600 25px/1 Caveat,cursive;rotate:2deg;box-shadow:0 6px 12px -6px rgba(0,0,0,.5)}
 .seeall{display:none}
 .topnav .menu{display:none}
 @media (prefers-reduced-motion:reduce),(max-width:900px){
   .corkfull{transform:none}
+  .pinnote{position:static;display:inline-block;margin:0 0 6px 5vw}
   .boardhint{position:relative;left:auto;top:auto;display:inline-block;margin:0 0 0 22px}
   .seeall{display:block;text-align:center;margin:30px 0 0}
 }
 @media (max-width:900px){
   .homenav{transform:none}  /* phones: the menu bar is there from the first screen */
+  html{scroll-padding-top:64px}
   #lab{padding-top:64px;background:#2b2118}
   .topnav>span{display:none}
   .topnav .menu{display:block;position:relative}
@@ -562,5 +571,5 @@ html:not(.js) .vbox video{display:none}
   .bigpin::before{width:12px;top:-6px;margin-left:-6px}
   .cap{padding:6px 1px 8px}
   .cap small{font-size:10.5px}
-  .cap b{font-size:clamp(12px,3.4vw,16px);line-height:1.05;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .cap b{font-size:clamp(11px,3.05vw,15px);line-height:1.05;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 }
