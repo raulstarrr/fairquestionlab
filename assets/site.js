@@ -145,6 +145,8 @@
       c.addEventListener('mouseleave', function () { light(null); }); c.addEventListener('blur', function () { light(null); });
     });
   }
+  // Phone menu: close it once a link is picked.
+  $$('.menu a').forEach(function (a) { a.addEventListener('click', function () { a.closest('details').open = false; }); });
   // The slim menu appears once you scroll past the hello scene (phones and reduced motion too).
   var hn = $('.homenav');
   if (hn) addEventListener('scroll', function () { hn.classList.toggle('on', scrollY > innerHeight * .9); }, { passive: true });
@@ -154,14 +156,10 @@
   var range = function (attr, p) { if (!attr) return null; var a = attr.split(',').map(Number); return clamp((p - a[0]) / (a[1] - a[0])); };
   var lab = $('#lab');
 
-  // Zoom target: the cork board (scene coords 64.2–77.8% x, 9.4–35.2% y) centred and filling the screen.
+  // Short windows: Fava's bubble moves down to clear the cork board (its bottom edge is at 35.2% of the scene).
   function zoomVars() {
     if (!lab) return;
-    var st = $('.stage', lab), sc = $('.scene', lab), W = st.clientWidth, H = st.clientHeight, w = sc.offsetWidth, h = sc.offsetHeight;
-    var left = W / 2 - w / 2, top = sc.offsetTop, cx = left + .709 * w, cy = top + .223 * h;
-    lab.style.setProperty('--zs', Math.min(.96 * W / (.136 * w), .96 * H / (.258 * h)).toFixed(3));
-    lab.style.setProperty('--zx', (W / 2 - cx).toFixed(1) + 'px');
-    lab.style.setProperty('--zy', (H / 2 - cy).toFixed(1) + 'px');
+    var sc = $('.scene', lab), h = sc.offsetHeight, top = sc.offsetTop;
     var bub = $('.bubble', lab), cast = $('.cast', lab);  // short windows: Fava's bubble moves down to clear the cork board
     if (bub && cast) { bub.style.translate = ''; var gap = top + .352 * h + 10 - (cast.offsetTop + bub.offsetTop); bub.style.translate = gap > 0 ? '0 ' + Math.round(gap) + 'px' : ''; }
   }
@@ -183,7 +181,7 @@
         var ease = function (t) { return t * t * (3 - 2 * t); };
         var rk = Math.min(m - 1, base + (base < m - 1 ? ease(clamp((f - .55) / .45)) : 0));
         bd.style.setProperty('--rk', rk.toFixed(4));
-        bd.classList.toggle('live', z !== null && z > .9);
+        bd.classList.toggle('live', z !== null && z > 0);
         rows.forEach(function (row, i) { row.style.setProperty('--c', (i ? clamp((x - i + .45) / .5) : clamp(x / .35)).toFixed(4)); });
       }
       if (k !== null) $$('[data-steps]', s).forEach(function (box) {
