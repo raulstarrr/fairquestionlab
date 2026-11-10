@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Fair Question Lab</title>
 <meta name="description" content="Weird questions, serious answers. Whim asks, Dr. Fava checks the facts, and every claim is sourced.">
 <meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#FFD54A" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1828" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="Fair Question Lab">
 <meta property="og:description" content="Weird questions, serious answers. Whim asks, Dr. Fava checks the facts, and every claim is sourced.">
 <meta property="og:url" content="https://fairquestionlab.com/">
@@ -13,74 +15,166 @@
 <link rel="canonical" href="https://fairquestionlab.com/">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-180.png">
-<style>
-:root{--bg:#FFD54A;--card:#FBF5E6;--ink:#1d1a17;--muted:#5d554c;--accent:#5B3DB8;--line:#e6dcc4}
-@media (prefers-color-scheme:dark){:root{--bg:#17141f;--card:#231f2e;--ink:#f4eddc;--muted:#b7ad9c;--accent:#FFD54A;--line:#3a3348}}
-*{box-sizing:border-box}
-[hidden]{display:none!important}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-text-size-adjust:100%}
-main{max-width:560px;margin:0 auto;padding:32px 16px 48px}
-a{color:var(--accent)}
-.card a,.src a{color:#5B3DB8}
-@media (prefers-color-scheme:dark){.card a,.src a{color:#FFD54A}}
-h1{font-size:1.75rem;line-height:1.2;margin:.4em 0 .2em;letter-spacing:-.01em}
-h2{font-size:1rem;margin:1.8em 0 .6em;text-transform:uppercase;letter-spacing:.06em}
-.card{background:var(--card);border-radius:18px;padding:18px;box-shadow:0 3px 0 rgba(0,0,0,.12)}
-.head{text-align:center}
-.avatar{width:112px;height:112px;border-radius:50%;display:block;margin:0 auto;box-shadow:0 3px 0 rgba(0,0,0,.15)}
-.tag{color:var(--muted);margin:.2em 0 1.2em}
-.btn{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:52px;padding:12px 18px;margin:10px 0;border-radius:14px;background:var(--card);color:var(--ink);text-decoration:none;font-weight:700;box-shadow:0 3px 0 rgba(0,0,0,.12)}
-.btn span{font-weight:400;color:var(--muted);font-size:.9em}
-.short{display:flex;gap:14px;align-items:center;color:inherit;text-decoration:none;margin-bottom:18px}
-.short img{width:90px;height:160px;object-fit:cover;border-radius:10px;flex:none;background:var(--line)}
-.short b{display:block;font-size:1.15rem;line-height:1.3;margin:2px 0 4px}
-.short small{color:var(--muted)}
-ul.more{list-style:none;padding:0 18px;margin:0}
-ul.more li+li{border-top:1px solid var(--line)}
-ul.more a{display:block;padding:13px 0;text-decoration:none;color:var(--ink)}
-.video{display:block;position:relative;max-width:280px;margin:18px auto}
-.video img{width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:16px;display:block;box-shadow:0 3px 0 rgba(0,0,0,.15)}
-.video span{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);background:rgba(0,0,0,.78);color:#fff;padding:10px 18px;border-radius:999px;font-weight:700;white-space:nowrap}
-ol.src{padding:18px 18px 18px 2.4em}
-ol.src li{margin:0 0 .9em;overflow-wrap:anywhere}
-ol.src li:last-child{margin:0}
-footer{margin-top:36px;font-size:.88rem;color:var(--muted);text-align:center}
-footer a{color:inherit}
-</style>
+<link rel="preload" as="image" href="assets/lab-room.webp" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=619a6dde">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
+<a class="skip" href="#latest">Skip to the latest Short</a>
+<nav class="topnav homenav" aria-label="Site"><a class="brand" href="#lab">FAIR QUESTION LAB</a><span><a href="#lab">The board</a><a href="#latest">Newest Short</a><a href="#map">Topic map</a><a href="shorts/">All Shorts</a><a href="#night">Follow</a></span></nav>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="chalk" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter></svg>
+
 <main>
-<div class="head">
-<img class="avatar" src="avatar-240.jpg" alt="Whim, a purple paper blob, and Dr. Fava, a bean scientist" width="112" height="112">
-<h1>Fair Question Lab</h1>
-<p class="tag">Weird questions, serious answers. Whim asks, Dr. Fava checks the facts, and every claim is sourced.</p>
+<!-- 1. The lab. Scrolling zooms into the cork board, where the Shorts are pinned up one by one, newest first. -->
+<section id="lab" class="pin" data-scene="pin" data-z="0.156,0.469" data-k="0.469,0.906" data-buddy="hang" style="--len:420vh" aria-label="The lab">
+<div class="stage"><div class="scene-h">
+  <div class="scene sc sz">
+    <img class="room" src="assets/lab-room.webp" alt="" width="2400" height="1357" fetchpriority="high">
+    <i class="lampglow" aria-hidden="true"></i>
+    <div class="board">
+      <div class="chalk c-title"><div class="w"><h1>FAIR QUESTION LAB</h1><p>Weird questions. Serious answers.</p></div></div>
+      <span class="scrib" style="left:4%;top:6%;rotate:-6deg">E = mc²</span><span class="scrib" style="right:5%;top:5%;rotate:5deg">H₂O ?</span>
+      <span class="scrib" style="left:5%;bottom:6%;rotate:4deg">a² + b² = c²</span><span class="scrib" style="right:6%;bottom:7%;rotate:-4deg">F = ma</span>
+      <span class="scrib" style="left:44%;bottom:2%;rotate:-2deg">πr² →</span>
+    </div>
+    <div class="cork"><a class="mini" href="s/006-jeans-blue/" data-tag="#006 · 9 Nov" style="left:7.92%;top:5.59%;--cw:0.2572;--r:-3deg;--ox:0%;--oy:0%;--hs:1.3"><b class="newtag">NEW</b><span class="ph"><img src="s/006-jeans-blue/cover.jpg" alt="Why Are Jeans Blue but White Inside?" width="90" height="160"><video muted loop playsinline preload="none" data-src="s/006-jeans-blue/preview.mp4"></video></span></a><a class="mini" href="s/005-chilli-heat/" data-tag="#005 · 8 Nov" style="left:37.14%;top:5.59%;--cw:0.2572;--r:2deg;--ox:50%;--oy:0%;--hs:1.3"><span class="ph"><img src="s/005-chilli-heat/cover.jpg" alt="Why Are Chillies Hot? Not for Birds" width="90" height="160"><video muted loop playsinline preload="none" data-src="s/005-chilli-heat/preview.mp4"></video></span></a><a class="mini" href="s/004-hoo-haa-breath/" data-tag="#004 · 7 Nov" style="left:66.36%;top:5.59%;--cw:0.2572;--r:-1.5deg;--ox:100%;--oy:0%;--hs:1.3"><span class="ph"><img src="s/004-hoo-haa-breath/cover.jpg" alt="Why Is Your Breath Hot and Cold?" width="90" height="160"><video muted loop playsinline preload="none" data-src="s/004-hoo-haa-breath/preview.mp4"></video></span></a><a class="mini" href="s/003-rainwater-colorado/" data-tag="#003 · 6 Nov" style="left:7.92%;top:51.63%;--cw:0.2572;--r:2.5deg;--ox:0%;--oy:100%;--hs:1.3"><span class="ph"><img src="s/003-rainwater-colorado/cover.jpg" alt="Is Rainwater Collection Illegal?" width="90" height="160"><video muted loop playsinline preload="none" data-src="s/003-rainwater-colorado/preview.mp4"></video></span></a><a class="mini" href="s/002-diesel-nozzle/" data-tag="#002 · 5 Nov" style="left:37.14%;top:51.63%;--cw:0.2572;--r:-2deg;--ox:50%;--oy:100%;--hs:1.3"><span class="ph"><img src="s/002-diesel-nozzle/cover.jpg" alt="Why a Diesel Nozzle Won&#x27;t Fit a Gas Car" width="90" height="160"><video muted loop playsinline preload="none" data-src="s/002-diesel-nozzle/preview.mp4"></video></span></a><a class="mini" href="s/001-everest-29002/" data-tag="#001 · 4 Nov" style="left:66.36%;top:51.63%;--cw:0.2572;--r:1deg;--ox:100%;--oy:100%;--hs:1.3"><span class="ph"><img src="s/001-everest-29002/cover.jpg" alt="Why Is Everest 29,002 Feet Tall?" width="90" height="160"><video muted loop playsinline preload="none" data-src="s/001-everest-29002/preview.mp4"></video></span></a><p class="corktag" aria-hidden="true"><small></small><b></b></p></div>
+    <p class="tagline">Weird questions, serious answers. Whim asks, Dr. Fava checks the facts, and every claim is sourced.</p>
+  </div>
+  <div class="cast sc sz">
+    <div class="actor whim-a"><div class="enter-l"><button class="tapme char" style="--ch:1000" aria-label="Whim, the purple paper blob. Tap him."><span class="breathe"><span class="pose p1" style="--w:794;--h:792;--ax:337;--k:1"><img src="assets/p/pip-wave.webp" alt="" width="794" height="792"><i class="eye" style="--ex:275;--ey:252;--rx:84;--ry:92"><b></b></i><i class="lid" style="--ex:275;--ey:252;--rx:84;--ry:92;--skin:#7957C0;--bd:0.00s"></i><i class="eye" style="--ex:478;--ey:228;--rx:84;--ry:92"><b></b></i><i class="lid" style="--ex:478;--ey:228;--rx:84;--ry:92;--skin:#7957C0;--bd:0.03s"></i></span><span class="pose rx" style="--w:770;--h:731;--ax:354;--k:1"><img src="assets/p/pip-laughing.webp" alt="" width="770" height="731" loading="lazy"></span><span class="pose rx" style="--w:675;--h:742;--ax:242;--k:1"><img src="assets/p/pip-gasp.webp" alt="" width="675" height="742" loading="lazy"></span><span class="pose rx" style="--w:756;--h:695;--ax:346;--k:1"><img src="assets/p/pip-jump.webp" alt="" width="756" height="695" loading="lazy"></span><span class="pose rx" style="--w:580;--h:527;--ax:269;--k:1.56"><img src="assets/p/pip-cheer.webp" alt="" width="580" height="527" loading="lazy"></span></span></button></div></div>
+    <div class="actor fava-a"><div class="enter-r"><div class="char" style="--ch:1100"><span class="breathe"><span class="pose p1" style="--w:588;--h:1092;--ax:332;--k:1"><img src="assets/p/fava-wave.webp" alt="Dr. Fava, a bean scientist in a lab coat" width="588" height="1092"><i class="eye f" style="--ex:248;--ey:318;--rx:44;--ry:43"><b></b></i><i class="eye f" style="--ex:408;--ey:318;--rx:44;--ry:43"><b></b></i><i class="mouth" style="--mx:327;--my:460;--mw:95"><i class="hello-talk"></i></i></span></span></div></div></div>
+    <div class="bubble"><div class="in"><b>Hello!</b>I'm Dr. Fava. This is Whim. He asks the weird questions; I check the answers.</div></div>
+  </div>
+  <div class="hint sc">Scroll into the lab</div>
+  </div>
+  <div class="corkfull sc sz" data-board aria-label="The newest Shorts">
+    <p class="pinnote">The board · newest first</p>
+    <div class="rowsbox"><div class="brow" style="--i:0"><a class="bigpin" href="s/006-jeans-blue/" style="--r:-2.5deg;--j:0"><span class="photo"><img src="s/006-jeans-blue/cover.jpg" alt="" width="300" height="533" loading="lazy"><video muted loop playsinline preload="none" data-src="s/006-jeans-blue/preview.mp4"></video></span><span class="cap"><small>#006 · 9 Nov</small><b>Why Are Jeans Blue but White Inside?</b></span></a><a class="bigpin" href="s/005-chilli-heat/" style="--r:1.8deg;--j:1"><span class="photo"><img src="s/005-chilli-heat/cover.jpg" alt="" width="300" height="533" loading="lazy"><video muted loop playsinline preload="none" data-src="s/005-chilli-heat/preview.mp4"></video></span><span class="cap"><small>#005 · 8 Nov</small><b>Why Are Chillies Hot? Not for Birds</b></span></a><a class="bigpin" href="s/004-hoo-haa-breath/" style="--r:-1.2deg;--j:2"><span class="photo"><img src="s/004-hoo-haa-breath/cover.jpg" alt="" width="300" height="533" loading="lazy"><video muted loop playsinline preload="none" data-src="s/004-hoo-haa-breath/preview.mp4"></video></span><span class="cap"><small>#004 · 7 Nov</small><b>Why Is Your Breath Hot and Cold?</b></span></a></div><div class="brow" style="--i:1"><a class="bigpin" href="s/003-rainwater-colorado/" style="--r:2.2deg;--j:0"><span class="photo"><img src="s/003-rainwater-colorado/cover.jpg" alt="" width="300" height="533" loading="lazy"><video muted loop playsinline preload="none" data-src="s/003-rainwater-colorado/preview.mp4"></video></span><span class="cap"><small>#003 · 6 Nov</small><b>Is Rainwater Collection Illegal?</b></span></a><a class="bigpin" href="s/002-diesel-nozzle/" style="--r:-1.8deg;--j:1"><span class="photo"><img src="s/002-diesel-nozzle/cover.jpg" alt="" width="300" height="533" loading="lazy"><video muted loop playsinline preload="none" data-src="s/002-diesel-nozzle/preview.mp4"></video></span><span class="cap"><small>#002 · 5 Nov</small><b>Why a Diesel Nozzle Won&#x27;t Fit a Gas Car</b></span></a><a class="bigpin" href="s/001-everest-29002/" style="--r:1deg;--j:2"><span class="photo"><img src="s/001-everest-29002/cover.jpg" alt="" width="300" height="533" loading="lazy"><video muted loop playsinline preload="none" data-src="s/001-everest-29002/preview.mp4"></video></span><span class="cap"><small>#001 · 4 Nov</small><b>Why Is Everest 29,002 Feet Tall?</b></span></a></div></div>
+  </div>
 </div>
-<a class="short card" href="s/007-seal-touch/" data-latest data-at="2026-11-10T17:00:00+00:00" hidden><img src="s/007-seal-touch/cover.jpg" alt="" width="90" height="160" loading="lazy"><div><small>Latest Short · #007</small><b>Why Is It Illegal to Touch a Seal?</b><small>Watch it + see the sources →</small></div></a>
-<a class="short card" href="s/006-jeans-blue/" data-latest data-at="2026-11-09T17:00:00+00:00" hidden><img src="s/006-jeans-blue/cover.jpg" alt="" width="90" height="160" loading="lazy"><div><small>Latest Short · #006</small><b>Why Are Jeans Blue but White Inside?</b><small>Watch it + see the sources →</small></div></a>
-<a class="short card" href="s/005-chilli-heat/" data-latest data-at="2026-11-08T17:00:00+00:00"><img src="s/005-chilli-heat/cover.jpg" alt="" width="90" height="160" loading="lazy"><div><small>Latest Short · #005</small><b>Why Are Chillies Hot? Not for Birds</b><small>Watch it + see the sources →</small></div></a>
-<a class="short card" href="s/004-hoo-haa-breath/" data-latest data-at="2026-11-07T17:00:00+00:00" hidden><img src="s/004-hoo-haa-breath/cover.jpg" alt="" width="90" height="160" loading="lazy"><div><small>Latest Short · #004</small><b>Why Is Your Breath Hot and Cold?</b><small>Watch it + see the sources →</small></div></a>
-<a class="short card" href="s/003-rainwater-colorado/" data-latest data-at="2026-11-06T17:00:00+00:00" hidden><img src="s/003-rainwater-colorado/cover.jpg" alt="" width="90" height="160" loading="lazy"><div><small>Latest Short · #003</small><b>Is Rainwater Collection Illegal?</b><small>Watch it + see the sources →</small></div></a>
-<a class="short card" href="s/002-diesel-nozzle/" data-latest data-at="2026-11-05T17:00:00+00:00" hidden><img src="s/002-diesel-nozzle/cover.jpg" alt="" width="90" height="160" loading="lazy"><div><small>Latest Short · #002</small><b>Why a Diesel Nozzle Won&#x27;t Fit a Gas Car</b><small>Watch it + see the sources →</small></div></a>
-<a class="short card" href="s/001-everest-29002/" data-latest data-at="2026-11-04T17:00:00+00:00" hidden><img src="s/001-everest-29002/cover.jpg" alt="" width="90" height="160" loading="lazy"><div><small>Latest Short · #001</small><b>Why Is Everest 29,002 Feet Tall?</b><small>Watch it + see the sources →</small></div></a>
-<a class="btn" href="https://www.youtube.com/@FairQuestionLab" rel="me noopener">YouTube <span>@FairQuestionLab</span></a>
-<a class="btn" href="https://www.tiktok.com/@fairquestionlab" rel="me noopener">TikTok <span>@fairquestionlab</span></a>
-<a class="btn" href="https://www.instagram.com/fairquestionlab/" rel="me noopener">Instagram <span>@fairquestionlab</span></a>
-<h2>Every Short, with its sources</h2>
-<ul class="more card">
-<li data-at="2026-11-10T17:00:00+00:00" hidden><a href="s/007-seal-touch/">#007 · Why Is It Illegal to Touch a Seal?</a></li>
-<li data-at="2026-11-09T17:00:00+00:00" hidden><a href="s/006-jeans-blue/">#006 · Why Are Jeans Blue but White Inside?</a></li>
-<li data-at="2026-11-08T17:00:00+00:00"><a href="s/005-chilli-heat/">#005 · Why Are Chillies Hot? Not for Birds</a></li>
-<li data-at="2026-11-07T17:00:00+00:00"><a href="s/004-hoo-haa-breath/">#004 · Why Is Your Breath Hot and Cold?</a></li>
-<li data-at="2026-11-06T17:00:00+00:00"><a href="s/003-rainwater-colorado/">#003 · Is Rainwater Collection Illegal?</a></li>
-<li data-at="2026-11-05T17:00:00+00:00"><a href="s/002-diesel-nozzle/">#002 · Why a Diesel Nozzle Won&#x27;t Fit a Gas Car</a></li>
-<li data-at="2026-11-04T17:00:00+00:00"><a href="s/001-everest-29002/">#001 · Why Is Everest 29,002 Feet Tall?</a></li>
-</ul>
-<script>
-var now=Date.now(),shown=0;
-document.querySelectorAll('[data-at]').forEach(function(el){var due=Date.parse(el.dataset.at)<=now;
-if(el.hasAttribute('data-latest')){el.hidden=!(due&&!shown);if(due)shown=1}else{el.hidden=!due}});
-</script>
-<footer><a href="./">Fair Question Lab</a> · <a href="mailto:hello@fairquestionlab.com">hello@fairquestionlab.com</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></footer>
+</section>
+
+<!-- 2. Every claim gets checked: each Short's own world, stamped -->
+<section id="check" class="pin" data-scene="pin" data-k="0,1" data-buddy="magnifier" style="--len:370vh" aria-labelledby="check-h">
+<div class="stage">
+  <div class="worlds" data-steps><img class="world sc sk" data-step src="s/006-jeans-blue/scene.webp" alt="" loading="lazy"><img class="world sc sk" data-step src="s/005-chilli-heat/scene.webp" alt="" loading="lazy"><img class="world sc sk" data-step src="s/004-hoo-haa-breath/scene.webp" alt="" loading="lazy"></div>
+  <div class="shade"></div>
+  <header class="checkhead"><p class="kicker">How we check</p><h2 id="check-h">EVERY CLAIM GETS CHECKED</h2>
+    <p>Dr. Fava checks each claim against the original: the study, the law, the patent. No source, no claim.</p>
+    <p><a class="allsrc" href="shorts/">Every source, every Short →</a></p></header>
+  <div class="claims" data-steps><article class="claim sc sk" data-step><p class="kicker">#006 · 3 sources</p><h3>Why Are Jeans Blue but White Inside?</h3><ol class="idx"><li><span>US 10,711,397 B1, &quot;Yarn material with a white center&quot; (RevoLaze, granted 14…</span><small>patents.google.com</small></li><li><span>US 8,215,138 B2, &quot;Device and continuous dyeing process with indigo&quot; (granted…</span><small>patents.google.com</small></li></ol><a href="s/006-jeans-blue/">Every source for this Short →</a><span class="stamp">CHECKED ✓</span></article><article class="claim sc sk" data-step><p class="kicker">#005 · 4 sources</p><h3>Why Are Chillies Hot? Not for Birds</h3><ol class="idx"><li><span>Tewksbury &amp; Nabhan (2001), &quot;Directed deterrence by capsaicin in chillies&quot;,…</span><small>doi.org</small></li><li><span>University of Florida news release on the paper (2001)</span><small>archive.news.ufl.edu</small></li></ol><a href="s/005-chilli-heat/">Every source for this Short →</a><span class="stamp">CHECKED ✓</span></article><article class="claim sc sk" data-step><p class="kicker">#004 · 3 sources</p><h3>Why Is Your Breath Hot and Cold?</h3><ol class="idx"><li><span>Robert Matthews (physicist), BBC Science Focus, &quot;Why does blowing hard on…</span><small>sciencefocus.com</small></li><li><span>The Naked Scientists (Cambridge), &quot;Why is your breath sometimes warm and…</span><small>thenakedscientists.com</small></li></ol><a href="s/004-hoo-haa-breath/">Every source for this Short →</a><span class="stamp">CHECKED ✓</span></article></div>
+  <div class="fava-act" data-act="walk"><div class="char"><span class="pose a-walk" style="--w:356;--h:615;--ax:163;--k:2.0"><img src="assets/p/fava-walk-right.webp" alt="" width="356" height="615" loading="lazy"><i class="mouth" style="--mx:204;--my:254;--mw:48"><i class=""></i></i></span><span class="pose a-mag" style="--w:546;--h:1093;--ax:280;--k:1"><img src="assets/p/fava-magnifier.webp" alt="" width="546" height="1093" loading="lazy"><i class="mouth" style="--mx:263;--my:501;--mw:105"><i class=""></i></i></span><span class="pose a-stamp" style="--w:826;--h:972;--ax:521;--k:1.04"><img src="assets/p/fava-stamp.webp" alt="" width="826" height="972" loading="lazy"><i class="mouth" style="--mx:514;--my:432;--mw:92"><i class=""></i></i></span><span class="pose a-tick" style="--w:408;--h:632;--ax:255;--k:1.71"><img src="assets/p/fava-tick.webp" alt="" width="408" height="632" loading="lazy"><i class="mouth" style="--mx:271;--my:267;--mw:55"><i class=""></i></i></span></div></div>
+</div>
+</section>
+
+<!-- 3. The latest Short, on the projector screen -->
+<section id="latest" class="pin" data-scene="pin" data-buddy="sit" style="--len:200vh" aria-labelledby="latest-h">
+<div class="stage">
+  <div class="scene">
+    <img class="room" src="assets/lab-room.webp" alt="" width="2400" height="1357" loading="lazy">
+  </div>
+  <i class="dim sc" aria-hidden="true"></i>
+  <div class="projector">
+    <i class="roller" aria-hidden="true"></i>
+    <div class="screen sc">
+      <a class="yt" href="https://youtube.com/shorts/Db_gDAcSizc" data-yt="Db_gDAcSizc" rel="noopener" aria-label="Play the newest Short: Why Are Jeans Blue but White Inside?">
+        <img src="s/006-jeans-blue/cover.jpg" alt="" width="360" height="640" loading="lazy"><span class="play">▶</span></a>
+    </div>
+  </div>
+  <div class="char pullfava sc"><span class="pose " style="--w:551;--h:1065;--ax:288;--k:1.03"><img src="assets/p/fava-pull.webp" alt="Dr. Fava pulling down a projector screen" width="551" height="1065" loading="lazy"><i class="mouth" style="--mx:309;--my:501;--mw:92"><i class=""></i></i></span></div>
+  <div class="char sitwhim"><span class="pose " style="--w:517;--h:494;--ax:239;--k:1.54"><img src="assets/p/pip-sit.webp" alt="" width="517" height="494" loading="lazy"></span></div>
+  <div class="nowplaying paperbox sc" data-slug="006-jeans-blue">
+    <p class="kicker">Newest Short · <span class="num">#006</span></p>
+    <h2 id="latest-h" class="big">Why Are Jeans Blue but White Inside?</h2>
+    <p class="ans">Indigo won&#x27;t dissolve in water, so dye works change it into a soluble form, dip the warp threads, and the air turns it blue again. It only coats the outside of each thread, so the core stays white (that&#x27;s why jeans fade), and the crosswise weft threads are left white (that&#x27;s the inside).</p>
+    <p class="row"><a class="btn src" href="s/006-jeans-blue/">The answer + every source</a></p>
+    <p class="next">Next Short: <span class="nat">Tue 10 Nov, 5 pm UK</span><span class="cdw"> · in <b class="countdown"></b></span></p>
+  </div>
+</div>
+</section>
+
+<!-- 4. Next in the lab -->
+<section id="next" class="torn" data-scene="view" data-buddy="puzzled" aria-labelledby="next-h">
+<div class="wrap">
+  <div class="nextboard rise sc">
+    <p class="chalk-k">Next in the lab</p>
+    <h2 id="next-h" class="chalkq">Why Is It Illegal to Touch a Seal?</h2>
+    <p class="chalk-d"><span class="nday">Tue 10 Nov</span> · 5 pm UK<span class="cdw"> · in <b class="countdown"></b></span></p>
+  </div>
+  <div class="nextside">
+    <p class="asklabel">Ask Whim: a question from the archive</p>
+    <a class="asksign" href="s/001-everest-29002/" data-root=""><span class="char"><span class="pose" style="--w:734;--h:716;--ax:380;--k:1"><img src="assets/p/pip-sign-front.webp" alt="" width="734" height="716" loading="lazy"><span class="sign" style="--sx:122;--sy:293;--sw:495;--sh:341"><span class="st">Why Is Everest 29,002 Feet Tall?</span></span></span></span></a>
+    <button class="btn askbtn" type="button" hidden>Ask him another ↻</button>
+    <p class="votenote"><b>Some Shorts end with a vote.</b> Comment A, B or C, and the winner becomes a future Short.</p>
+  </div>
+</div>
+</section>
+
+<!-- 5. The archive -->
+<section id="shorts" class="torn" data-buddy="peek" aria-labelledby="shorts-h">
+<div class="wrap arch">
+  <div>
+    <p class="kicker" style="color:inherit">The archive</p>
+    <h2 id="shorts-h">EVERY SHORT, SEARCHABLE</h2>
+    <p class="lead">All 6 Shorts so far, newest first, each with its sources. Filter by topic or search for a word.</p>
+    <p class="lanes"><a href="shorts/#body-physics">Body &amp; physics</a><a href="shorts/#car-mysteries">Car mysteries</a><a href="shorts/#everyday-science">Everyday science</a><a href="shorts/#food-science">Food science</a><a href="shorts/#number-origins">Number origins</a><a href="shorts/#weird-laws">Weird laws</a></p>
+    <p style="margin-top:22px"><a class="btn" href="shorts/">Browse all 6 Shorts →</a></p>
+  </div>
+  <a class="fan" href="shorts/" aria-label="Browse all Shorts"><img src="s/006-jeans-blue/cover.jpg" alt="" width="120" height="213" loading="lazy" style="--i:0"><img src="s/005-chilli-heat/cover.jpg" alt="" width="120" height="213" loading="lazy" style="--i:1"><img src="s/004-hoo-haa-breath/cover.jpg" alt="" width="120" height="213" loading="lazy" style="--i:2"><img src="s/003-rainwater-colorado/cover.jpg" alt="" width="120" height="213" loading="lazy" style="--i:3"><img src="s/002-diesel-nozzle/cover.jpg" alt="" width="120" height="213" loading="lazy" style="--i:4"></a>
+</div>
+</section>
+
+<!-- 5b. Topic map: Shorts that share science joined by red string -->
+<section id="map" data-buddy="magnifier" aria-labelledby="map-h">
+<div class="wrap">
+  <p class="kicker">The topic map</p>
+  <h2 id="map-h">HOW THE QUESTIONS CONNECT</h2>
+  <p class="lead">Every Short is pinned to the science it shares with the others. Follow the red string: dye leads to chemistry, chemistry to chillies, chillies to birds. <span class="hoveronly">Point at a card to follow its thread.</span><span class="touchonly">Swipe each row to see every Short on that thread.</span></p>
+  <div class="tframe"><div class="tmap" style="aspect-ratio:1000/540"><svg class="strings" viewBox="0 0 1000 540" aria-hidden="true"><path d="M355 45C389 10 605 10 639 95" data-a="s:006-jeans-blue" data-b="t:Chemistry"/><path d="M355 45C372 10 476 17 492 99" data-a="s:006-jeans-blue" data-b="t:Everyday things"/><path d="M649 293C734 207 734 10 639 95" data-a="s:005-chilli-heat" data-b="t:Chemistry"/><path d="M649 293C632 211 522 261 505 343" data-a="s:005-chilli-heat" data-b="t:Your body"/><path d="M359 278C377 195 487 260 505 343" data-a="s:004-hoo-haa-breath" data-b="t:Your body"/><path d="M213 39C300 10 300 252 215 347" data-a="s:003-rainwater-colorado" data-b="t:Planet Earth"/><path d="M791 31C772 10 657 12 639 95" data-a="s:002-diesel-nozzle" data-b="t:Chemistry"/><path d="M791 31C755 10 528 10 492 99" data-a="s:002-diesel-nozzle" data-b="t:Everyday things"/><path d="M79 280C96 198 199 265 215 347" data-a="s:001-everest-29002" data-b="t:Planet Earth"/></svg><span class="tcard" data-n="t:Chemistry" tabindex="0" style="left:63.89%;top:17.59%;--r:-2deg"><b>CHEMISTRY</b><small>3 Shorts</small></span><span class="tcard" data-n="t:Everyday things" tabindex="0" style="left:49.20%;top:18.33%;--r:1.5deg"><b>EVERYDAY THINGS</b><small>2 Shorts</small></span><span class="tcard" data-n="t:Planet Earth" tabindex="0" style="left:21.53%;top:64.26%;--r:-1deg"><b>PLANET EARTH</b><small>2 Shorts</small></span><span class="tcard" data-n="t:Your body" tabindex="0" style="left:50.50%;top:63.52%;--r:2.2deg"><b>YOUR BODY</b><small>2 Shorts</small></span><a class="tpin" data-n="s:006-jeans-blue" href="s/006-jeans-blue/" style="left:35.51%;top:8.33%;--r:2deg"><img src="s/006-jeans-blue/cover.jpg" alt="" width="90" height="160" loading="lazy"><span>Why Are Jeans Blue but White Inside?</span></a><a class="tpin" data-n="s:005-chilli-heat" href="s/005-chilli-heat/" style="left:64.89%;top:54.26%;--r:-2.5deg"><img src="s/005-chilli-heat/cover.jpg" alt="" width="90" height="160" loading="lazy"><span>Why Are Chillies Hot? Not for Birds</span></a><a class="tpin" data-n="s:004-hoo-haa-breath" href="s/004-hoo-haa-breath/" style="left:35.91%;top:51.48%;--r:1deg"><img src="s/004-hoo-haa-breath/cover.jpg" alt="" width="90" height="160" loading="lazy"><span>Why Is Your Breath Hot and Cold?</span></a><a class="tpin" data-n="s:003-rainwater-colorado" href="s/003-rainwater-colorado/" style="left:21.33%;top:7.22%;--r:-1.5deg"><img src="s/003-rainwater-colorado/cover.jpg" alt="" width="90" height="160" loading="lazy"><span>Is Rainwater Collection Illegal?</span></a><a class="tpin" data-n="s:002-diesel-nozzle" href="s/002-diesel-nozzle/" style="left:79.07%;top:5.74%;--r:3deg"><img src="s/002-diesel-nozzle/cover.jpg" alt="" width="90" height="160" loading="lazy"><span>Why a Diesel Nozzle Won&#x27;t Fit a Gas Car</span></a><a class="tpin" data-n="s:001-everest-29002" href="s/001-everest-29002/" style="left:7.94%;top:51.85%;--r:-1deg"><img src="s/001-everest-29002/cover.jpg" alt="" width="90" height="160" loading="lazy"><span>Why Is Everest 29,002 Feet Tall?</span></a></div></div>
+  <div class="tlist"><section><h3>CHEMISTRY <small>3 Shorts</small></h3><ul><li><a href="s/006-jeans-blue/"><img src="s/006-jeans-blue/cover.jpg" alt="" width="90" height="160" loading="lazy"><span>Why Are Jeans Blue but White Inside?</span></a></li><li><a href="s/005-chilli-heat/"><img src="s/005-chilli-heat/cover.jpg" alt="" width="90" height="160" loading="lazy"><span>Why Are Chillies Hot? Not for Birds</span></a></li><li><a href="s/002-diesel-nozzle/"><img src="s/002-diesel-nozzle/cover.jpg" alt="" width="90" height="160" loading="lazy"><span>Why a Diesel Nozzle Won&#x27;t Fit a Gas Car</span></a></li></ul></section><section><h3>EVERYDAY THINGS <small>2 Shorts</small></h3><ul><li><a href="s/006-jeans-blue/"><img src="s/006-jeans-blue/cover.jpg" alt="" width="90" height="160" loading="lazy"><span>Why Are Jeans Blue but White Inside?</span></a></li><li><a href="s/002-diesel-nozzle/"><img src="s/002-diesel-nozzle/cover.jpg" alt="" width="90" height="160" loading="lazy"><span>Why a Diesel Nozzle Won&#x27;t Fit a Gas Car</span></a></li></ul></section><section><h3>PLANET EARTH <small>2 Shorts</small></h3><ul><li><a href="s/003-rainwater-colorado/"><img src="s/003-rainwater-colorado/cover.jpg" alt="" width="90" height="160" loading="lazy"><span>Is Rainwater Collection Illegal?</span></a></li><li><a href="s/001-everest-29002/"><img src="s/001-everest-29002/cover.jpg" alt="" width="90" height="160" loading="lazy"><span>Why Is Everest 29,002 Feet Tall?</span></a></li></ul></section><section><h3>YOUR BODY <small>2 Shorts</small></h3><ul><li><a href="s/005-chilli-heat/"><img src="s/005-chilli-heat/cover.jpg" alt="" width="90" height="160" loading="lazy"><span>Why Are Chillies Hot? Not for Birds</span></a></li><li><a href="s/004-hoo-haa-breath/"><img src="s/004-hoo-haa-breath/cover.jpg" alt="" width="90" height="160" loading="lazy"><span>Why Is Your Breath Hot and Cold?</span></a></li></ul></section></div>
+</div>
+</section>
+
+<!-- 6. Meet the team + send a question -->
+<section id="meet" class="torn" data-buddy="envelope" aria-labelledby="meet-h">
+<div class="wrap">
+  <p class="kicker">The team</p>
+  <h2 id="meet-h">MEET WHIM AND DR. FAVA</h2>
+  <div class="duo">
+    <article class="card paperbox sc" data-scene="view"><span class="vbox" style="--poster:url(meet-whim.jpg)"><video data-auto muted loop playsinline preload="none" poster="assets/meet-whim.jpg" width="720" height="960"><source src="assets/meet-whim.mp4" type="video/mp4"></video></span>
+      <div><h3>WHIM</h3><p>Asks the questions. Whim never says a word: he holds up a sign with today's question, then reacts to the answer with his whole body.</p></div></article>
+    <article class="card paperbox sc" data-scene="view"><span class="vbox" style="--poster:url(meet-fava.jpg)"><video data-auto muted loop playsinline preload="none" poster="assets/meet-fava.jpg" width="720" height="960"><source src="assets/meet-fava.mp4" type="video/mp4"></video></span>
+      <div><h3>DR. FAVA</h3><p>Checks the answers. A dry, curious bean scientist and the only voice on the channel. Never without his clipboard of sources.</p></div></article>
+    <article class="card ask paperbox sc" data-scene="view">
+      <div class="askart"><div class="char"><span class="pose " style="--w:472;--h:551;--ax:219;--k:1.51"><img src="assets/p/pip-envelope.webp" alt="Whim holding an envelope" width="472" height="551" loading="lazy"></span></div><div class="char fv"><span class="pose " style="--w:325;--h:620;--ax:146;--k:1.68"><img src="assets/p/fava-letter.webp" alt="Dr. Fava reading a letter" width="325" height="620" loading="lazy"><i class="mouth" style="--mx:194;--my:254;--mw:54"><i class=""></i></i></span></div></div>
+      <div><h3>GOT A WEIRD QUESTION?</h3><p>The best ones are the questions you were too embarrassed to ask. Send yours; Whim reads every one.</p>
+      <p style="margin-top:14px"><a class="btn" href="mailto:hello@fairquestionlab.com?subject=A%20fair%20question">✉ Send a question</a></p></div></article>
+  </div>
+</div>
+</section>
 </main>
+
+<!-- 7. The lab at night: footer -->
+<footer id="night" data-buddy="asleep">
+  <div class="scene">
+    <img class="room" src="assets/lab-room.webp" alt="" width="2400" height="1357" loading="lazy">
+    <i class="nightgrade" aria-hidden="true"></i>
+    <img class="room lit" src="assets/lab-room.webp" alt="" width="2400" height="1357" loading="lazy">
+    <i class="moonwin" aria-hidden="true"><b></b></i>
+    <div class="board"><div class="chalk"><span class="big q">SEE YOU<br>AT 5 PM</span></div></div>
+    <div class="socials nightpins"><p class="pinlabel">FOLLOW THE LAB</p><a class="spin s0" href="https://www.youtube.com/@FairQuestionLab" rel="me noopener"><i class="tack"></i><svg viewBox="0 0 48 34" aria-hidden="true"><rect width="48" height="34" rx="9" fill="#e5322d"/><path d="M19 10l13 7-13 7z" fill="#fff"/></svg><span>YouTube</span></a><a class="spin s1" href="https://www.tiktok.com/@fairquestionlab" rel="me noopener"><i class="tack"></i><svg viewBox="0 0 40 44" aria-hidden="true"><path d="M27 2c1 5 4 8 10 8v7c-4 0-7-1-10-3v14a12 12 0 1 1-12-12h2v7a5 5 0 1 0 3 5V2z" fill="#25f4ee" transform="translate(-1.5 -1)"/><path d="M27 2c1 5 4 8 10 8v7c-4 0-7-1-10-3v14a12 12 0 1 1-12-12h2v7a5 5 0 1 0 3 5V2z" fill="#fe2c55" transform="translate(1.5 1)"/><path d="M27 2c1 5 4 8 10 8v7c-4 0-7-1-10-3v14a12 12 0 1 1-12-12h2v7a5 5 0 1 0 3 5V2z" fill="#111"/></svg><span>TikTok</span></a><a class="spin s2" href="https://www.instagram.com/fairquestionlab/" rel="me noopener"><i class="tack"></i><svg viewBox="0 0 44 44" aria-hidden="true"><defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#feda75"/><stop offset=".4" stop-color="#fa7e1e"/><stop offset=".7" stop-color="#d62976"/><stop offset="1" stop-color="#4f5bd5"/></linearGradient></defs><rect width="44" height="44" rx="12" fill="url(#ig)"/><rect x="9" y="9" width="26" height="26" rx="8" fill="none" stroke="#fff" stroke-width="3.4"/><circle cx="22" cy="22" r="6.4" fill="none" stroke="#fff" stroke-width="3.4"/><circle cx="31" cy="13" r="2.2" fill="#fff"/></svg><span>Instagram</span></a><a class="spin s3" href="mailto:hello@fairquestionlab.com" rel="me noopener"><i class="tack"></i><svg viewBox="0 0 46 34" aria-hidden="true"><rect width="46" height="34" rx="5" fill="#fff8e8" stroke="#5B3DB8" stroke-width="3"/><path d="M4 5l19 15L42 5" fill="none" stroke="#5B3DB8" stroke-width="3"/></svg><span>Email us</span></a></div>
+    <div class="sleeper"><div class="char"><span class="pose " style="--w:960;--h:479;--ax:268;--k:1.13"><img src="assets/p/pip-asleep.webp" alt="Whim asleep on the workbench" width="960" height="479" loading="lazy"></span></div><span class="zzz" aria-hidden="true"><i>z</i><i>z</i><i>Z</i></span></div>
+    <div class="beam" aria-hidden="true"><i></i></div>
+    <div class="motes" aria-hidden="true"><i style="--x:0%;--y:13%;--d:0.0s;--s:1"></i><i style="--x:37%;--y:74%;--d:7.3s;--s:2"></i><i style="--x:74%;--y:35%;--d:5.6s;--s:3"></i><i style="--x:11%;--y:96%;--d:3.9s;--s:1"></i><i style="--x:48%;--y:57%;--d:2.2s;--s:2"></i><i style="--x:85%;--y:18%;--d:0.5s;--s:3"></i><i style="--x:22%;--y:79%;--d:7.8s;--s:1"></i><i style="--x:59%;--y:40%;--d:6.1s;--s:2"></i><i style="--x:96%;--y:1%;--d:4.4s;--s:3"></i><i style="--x:33%;--y:62%;--d:2.7s;--s:1"></i><i style="--x:70%;--y:23%;--d:1.0s;--s:2"></i><i style="--x:7%;--y:84%;--d:8.3s;--s:3"></i><i style="--x:44%;--y:45%;--d:6.6s;--s:1"></i><i style="--x:81%;--y:6%;--d:4.9s;--s:2"></i><i style="--x:18%;--y:67%;--d:3.2s;--s:3"></i><i style="--x:55%;--y:28%;--d:1.5s;--s:1"></i><i style="--x:92%;--y:89%;--d:8.8s;--s:2"></i><i style="--x:29%;--y:50%;--d:7.1s;--s:3"></i></div>
+    <i class="bulb" aria-hidden="true"></i>
+  </div>
+  <p class="legal"><a href="corrections/">Corrections</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · © Fair Question Lab</p>
+</footer>
+
+<div class="buddy" aria-hidden="true"><div class="ruler"></div><div class="ride"><div class="char" style="--ch:800"><span data-pose="hang" class="pose on" style="--w:596;--h:586;--ax:297;--k:1.65"><img src="assets/p/pip-hang.webp" alt="" width="596" height="586" loading="lazy"></span><span data-pose="magnifier" class="pose " style="--w:539;--h:542;--ax:258;--k:1.26"><img src="assets/p/pip-magnifier.webp" alt="" width="539" height="542" loading="lazy"></span><span data-pose="sit" class="pose " style="--w:517;--h:494;--ax:239;--k:1.54"><img src="assets/p/pip-sit.webp" alt="" width="517" height="494" loading="lazy"></span><span data-pose="peek" class="pose " style="--w:593;--h:756;--ax:339;--k:1"><img src="assets/p/pip-peek.webp" alt="" width="593" height="756" loading="lazy"></span><span data-pose="puzzled" class="pose " style="--w:587;--h:661;--ax:289;--k:1.2"><img src="assets/p/pip-puzzled.webp" alt="" width="587" height="661" loading="lazy"></span><span data-pose="envelope" class="pose " style="--w:472;--h:551;--ax:219;--k:1.51"><img src="assets/p/pip-envelope.webp" alt="" width="472" height="551" loading="lazy"></span><span data-pose="asleep" class="pose " style="--w:960;--h:479;--ax:268;--k:1.13"><img src="assets/p/pip-asleep.webp" alt="" width="960" height="479" loading="lazy"></span></div></div></div>
+<script type="application/json" id="eps">[{"slug": "001-everest-29002", "num": "001", "title": "Why Is Everest 29,002 Feet Tall?", "answer": "Legend says surveyors got exactly 29,000 and added 2 ft so it wouldn't look like a guess. The records say six stations, 1849\u201350, averaged 29,002. Today: 29,032 ft.", "at": "2026-11-04T17:00:00+00:00", "yt": "ntcUcFS4hZU"}, {"slug": "002-diesel-nozzle", "num": "002", "title": "Why a Diesel Nozzle Won't Fit a Gas Car", "answer": "It's on purpose: since the 1970s unleaded switch, US law caps gasoline nozzles at 0.84 in and gas cars got a hole that small. Diesel nozzles are bigger. The catch: a gas nozzle fits a diesel car fine.", "at": "2026-11-05T17:00:00+00:00", "yt": "sRckt01A2gw"}, {"slug": "003-rainwater-colorado", "num": "003", "title": "Is Rainwater Collection Illegal?", "answer": "In Colorado, mostly yes, until 2016. Water law says rain already belongs to downstream rights holders. Now you can keep two barrels, 110 gallons, outdoor use only.", "at": "2026-11-06T17:00:00+00:00", "yt": "S3_gpmup3-A"}, {"slug": "004-hoo-haa-breath", "num": "004", "title": "Why Is Your Breath Hot and Cold?", "answer": "A thin, fast \"hoo\" jet drags in room air on the way, so it arrives cool and pulls heat off your skin. A slow \"haa\" barely mixes and lands warm.", "at": "2026-11-07T17:00:00+00:00", "yt": "dEuxmS6kAEc"}, {"slug": "005-chilli-heat", "num": "005", "title": "Why Are Chillies Hot? Not for Birds", "answer": "Capsaicin burns mammals, and mammals chew up the seeds. Birds can't feel it, and the seeds pass through them whole, ready to grow.", "at": "2026-11-08T17:00:00+00:00", "yt": "vr3Gy-XbK2w"}, {"slug": "006-jeans-blue", "num": "006", "title": "Why Are Jeans Blue but White Inside?", "answer": "Indigo won't dissolve in water, so dye works change it into a soluble form, dip the warp threads, and the air turns it blue again. It only coats the outside of each thread, so the core stays white (that's why jeans fade), and the crosswise weft threads are left white (that's the inside).", "at": "2026-11-09T17:00:00+00:00", "yt": "Db_gDAcSizc"}, {"slug": "007-seal-touch", "num": "007", "title": "Why Is It Illegal to Touch a Seal?", "answer": "In the US, the Marine Mammal Protection Act bans any \"take\" of a marine mammal, and \"take\" includes harassment: anything that disturbs it resting or nursing. A pup resting alone isn't abandoned, but one that's handled may be. NOAA's guidance: stay at least 100 yards back.", "at": "2026-11-10T17:00:00+00:00", "yt": "s5LIgNWdEPs"}]</script>
+<script src="assets/site.js?v=619a6dde" defer></script>
 </body>
 </html>
