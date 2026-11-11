@@ -150,6 +150,58 @@
   // The slim menu appears once you scroll past the hello scene (phones and reduced motion too).
   var hn = $('.homenav');
   if (hn) addEventListener('scroll', function () { hn.classList.toggle('on', scrollY > innerHeight * .9); }, { passive: true });
+
+  // Paper effects, once each as they scroll into view: marker swipes, Shorts pinned down onto the board, numbers counting up.
+  var calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!calm && 'IntersectionObserver' in window) {
+    var count = function (el) {
+      var n = +el.textContent, t0 = 0;
+      if (!(n > 1)) return;
+      el.style.display = 'inline-block'; el.style.minWidth = el.offsetWidth + 'px'; el.style.textAlign = 'right';  // no jiggle while it counts
+      var step = function (t) { t0 = t0 || t; var k = Math.min(1, (t - t0) / 900); el.textContent = Math.round(n * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    };
+    var seen = new IntersectionObserver(function (list) {
+      var batch = 0;
+      list.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target; seen.unobserve(el);
+        if (el.classList.contains('tick')) return count(el);
+        if (el.classList.contains('dropin')) el.style.setProperty('--di', batch++);
+        el.classList.remove('wait'); el.classList.add('in');
+      });
+    }, { threshold: .2 });
+    $$('mark.hl').forEach(function (el) { el.classList.add('wait'); seen.observe(el); });
+    $$('.archive-pins li, .tcard, .tpin, .tlist li, .corrs li').forEach(function (el) { el.classList.add('dropin', 'wait'); seen.observe(el); });
+    $$('.tick').forEach(function (el) { seen.observe(el); });
+  }
+
+  // Phones: tapping a polaroid opens a big preview first (the close button, Esc or a tap outside closes it; the page link is inside).
+  var touch = matchMedia('(max-width: 900px) and (pointer: coarse)');
+  if (window.HTMLDialogElement) $$('.bigpin, .archive-pins a').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      if (!touch.matches) return;
+      e.preventDefault();
+      var lb = $('.lb');
+      if (!lb) {
+        lb = document.createElement('dialog'); lb.className = 'lb'; lb.setAttribute('aria-label', 'Short preview');
+        lb.innerHTML = '<button class="lbx" type="button" aria-label="Close the preview">✕</button><figure><span class="slot"></span><figcaption><b></b><a class="btn">Watch it + every source →</a></figcaption></figure>';
+        document.body.appendChild(lb);
+        $('.lbx', lb).addEventListener('click', function () { lb.close(); });
+        lb.addEventListener('click', function (ev) { if (ev.target === lb || ev.target.tagName === 'FIGURE') lb.close(); });
+        lb.addEventListener('close', function () { $('.slot', lb).textContent = ''; if (lb.from) lb.from.focus(); });
+      }
+      var img = $('img', a), v = $('video', a), t = $('.cap b, .pimg + span', a), shot;
+      if (v && v.dataset.src && !calm) { shot = document.createElement('video'); shot.muted = true; shot.playsInline = true; shot.autoplay = true; shot.poster = img.src; shot.src = v.dataset.src; }
+      else { shot = document.createElement('img'); shot.src = img.src; shot.alt = ''; }
+      shot.className = 'shot';
+      $('.slot', lb).appendChild(shot);
+      $('figcaption b', lb).textContent = t ? t.textContent : img.alt;
+      $('figcaption a', lb).href = a.href;
+      lb.from = a; lb.showModal(); $('.lbx', lb).focus();
+    });
+  });
+
   if (reduce) return; // below: motion only
 
   var clamp = function (x) { return x < 0 ? 0 : x > 1 ? 1 : x; };

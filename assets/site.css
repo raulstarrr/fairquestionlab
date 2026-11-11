@@ -1,6 +1,6 @@
 /* Fair Question Lab home page (fairquestionlab.com). Copied to site/assets/ by tools/website.py.
    Desktop first (owner, 9 Nov); the phone pass comes after the desktop design is approved. */
-@font-face{font-family:"The Bold Font";src:url(theboldfont.ttf) format("truetype");font-display:swap}
+@font-face{font-family:"The Bold Font";src:url(theboldfont.woff2) format("woff2");font-display:swap}
 :root{--paper:#FFD54A;--cream:#FBF5E6;--card:#FBF5E6;--ink:#1d1a17;--muted:#5d554c;--accent:#5B3DB8;--shadow:rgba(60,40,0,.22);--chalk:#f4f1e6;
   --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --corkbg:radial-gradient(rgba(90,55,20,.35) 1px,transparent 1.6px) 0 0/7px 7px,radial-gradient(rgba(255,240,210,.28) 1px,transparent 1.6px) 3px 4px/9px 9px,#c69b62}
@@ -142,7 +142,7 @@ html:not(.js) .worlds img:not(:first-child),html:not(.js) .claim:not(:first-chil
 /* ---------- 2. Every claim gets checked: each Short's own world ---------- */
 #check .stage{background:#1d1736}
 .worlds img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 62%;animation-name:worldfade}
-@keyframes worldfade{0%{opacity:0;transform:scale(1.08)}22%,78%{opacity:1}100%{opacity:0;transform:scale(1)}}
+@keyframes worldfade{0%,20%{opacity:0;transform:scale(1.08)}30%,72%{opacity:1}80%,100%{opacity:0;transform:scale(1)}}  /* one world at a time: the next fades in only after this one is gone */
 .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(22,16,36,.82),rgba(22,16,36,.5) 42%,rgba(22,16,36,0) 72%)}
 .checkhead{position:absolute;left:max(6vw,calc(50% - 780px));top:9svh;max-width:min(560px,44vw);color:#fff4d6}
 .checkhead .kicker{color:#FFD54A}
@@ -346,7 +346,7 @@ html:not(.js) .screen,html:not(.js) .yt,html:not(.js) .nowplaying{animation:none
 .tv .tape{position:absolute;top:-12px;left:50%;width:92px;height:26px;translate:-50% 0;rotate:-3deg;background:rgba(255,255,255,.6);box-shadow:0 1px 2px rgba(0,0,0,.1);z-index:2}
 .tv .yt{aspect-ratio:9/16;height:auto;animation:none}
 .sws{text-align:center;margin:14px 0 0;font-weight:700}
-.sws a{color:#5B3DB8}
+.sws a{color:var(--accent)}
 .sread{min-width:0}
 .ans{padding:24px 28px;font-size:20px;line-height:1.55;color:var(--ink)}
 .ans p:last-child{margin:0}
@@ -398,6 +398,7 @@ html:not(.js) .filters{display:none}
 .nocorr{max-width:700px;padding:30px 34px;color:var(--ink)}
 .nocorr h2{font-size:40px;margin-bottom:12px}
 .nocorr a,.corrs a{color:#5B3DB8;font-weight:700}
+@media (prefers-color-scheme:dark){.nocorr a{color:var(--accent)}}
 .corrs{list-style:none;padding:0;margin:0;display:grid;gap:18px;max-width:780px}
 .corrs li{background:#fff;color:#2b2118;border-top:5px solid #e8765c;padding:20px 24px;box-shadow:0 3px 0 rgba(0,0,0,.08)}
 .corrs h3{font-size:28px;margin-bottom:8px}
@@ -572,4 +573,80 @@ html:not(.js) .vbox video{display:none}
   .cap{padding:6px 1px 8px}
   .cap small{font-size:10.5px}
   .cap b{font-size:clamp(11px,3.05vw,15px);line-height:1.05;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+}
+
+/* ---------- 11 Nov: paper effects (Magic UI ideas, cut from paper) + UX fixes. Each effect runs once; without JS or with
+   reduced motion everything is simply there; phones get no looping animation. ---------- */
+/* marker: a hand-drawn swipe behind a key word (site.js draws it when it scrolls into view) */
+mark.hl{--mh:56%;color:inherit;padding:0 .14em;margin:0 -.08em;-webkit-box-decoration-break:clone;box-decoration-break:clone;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'%3E%3Cpath fill='%23ffd54a' fill-opacity='.85' d='M3 9c40-4 90-6 150-5 15 0 30 1 44 3l-2 9 3 9-2 11c-50 2-110 4-160 3-12 0-24-1-34-2l2-10-3-9z'/%3E%3C/svg%3E") 0 100%/100% var(--mh) no-repeat}
+.chalk mark.hl{--mh:30%}
+.js mark.hl{transition:background-size .75s cubic-bezier(.6,.05,.3,1) .1s}
+.js mark.hl.wait{background-size:0 var(--mh)}
+@media (prefers-color-scheme:dark){.nocorr mark.hl{--mh:58%;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'%3E%3Cpath fill='%235B3DB8' d='M3 9c40-4 90-6 150-5 15 0 30 1 44 3l-2 9 3 9-2 11c-50 2-110 4-160 3-12 0-24-1-34-2l2-10-3-9z'/%3E%3C/svg%3E")}}  /* dark card: a purple marker keeps the light text readable */
+/* "pinned down": Shorts and map cards drop onto the board with a slight turn; the shadow tightens as they land */
+.dropin.wait{opacity:0}
+.dropin.in{animation:pindrop .6s cubic-bezier(.25,1.25,.5,1) calc(var(--di,0)*70ms) backwards}
+.tcard,.tpin{--bx:-50%;--rb:var(--r)}
+@keyframes pindrop{from{opacity:0;translate:var(--bx,0) -28px;rotate:calc(var(--rb,0deg) + 7deg);scale:1.06;filter:drop-shadow(0 26px 14px rgba(0,0,0,.35))}}
+/* number ticker: the real number is in the HTML; site.js counts up to it once */
+.tick{font-variant-numeric:tabular-nums}
+.ptag{position:relative;display:inline-block;margin:0 0 0 .4em;padding:4px 12px 5px;vertical-align:middle;white-space:nowrap;line-height:1.2;background:#fff8e8;color:#2b2118;font-weight:700;font-size:16px;rotate:-1.5deg;box-shadow:0 6px 12px -6px rgba(0,0,0,.6);}
+.checkhead p:has(.ptag){opacity:1}
+.ptag::before{content:"";position:absolute;top:-6px;left:22px;width:12px;height:12px;border-radius:50%;background:#d6452f;box-shadow:0 2px 2px rgba(0,0,0,.35)}
+.ptag b{font:400 22px/1 "The Bold Font",sans-serif;color:#b8322a}
+/* washi-tape strip of the latest Shorts: pure CSS, two copies scroll as one loop; stops on hover/focus; a swipe strip on phones and with reduced motion */
+.washi{position:relative;z-index:3;display:flex;align-items:center;overflow:hidden;margin:0 -1%;padding:0 1%;background:#f3b7a6 var(--grain);color:#2b2118;rotate:-.5deg;
+  box-shadow:0 4px 8px -5px rgba(0,0,0,.45);clip-path:polygon(0 8%,1% 0,2% 10%,3% 0,98% 0,99% 9%,100% 0,100% 92%,99% 100%,98% 90%,97% 100%,3% 100%,2% 91%,1% 100%,0 92%)}
+.washi>p{position:sticky;left:0;z-index:1;flex:none;margin:0;padding:0 14px 0 22px;align-self:stretch;display:flex;align-items:center;background:#2b2118;color:#FFD54A;font:400 17px/1 "The Bold Font",sans-serif;letter-spacing:.04em}
+.wtrack{display:flex;flex:none;animation:washi 70s linear infinite}
+.washi:hover .wtrack,.washi:focus-within .wtrack{animation-play-state:paused}
+.washi ul{display:flex;list-style:none;margin:0;padding:0}
+.washi a{display:flex;align-items:center;gap:6px;min-height:46px;padding:0 18px;white-space:nowrap;text-decoration:none;font-weight:700;font-size:15px}
+.washi li+li a::before,.washi ul+ul li:first-child a::before{content:"✂";margin-right:12px;opacity:.45;font-weight:400}
+.washi b{color:#8a2f22}
+.washi a:hover,.washi a[aria-current]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+@keyframes washi{to{transform:translateX(-50%)}}
+.ahero .washi{margin-top:30px}
+@media (prefers-reduced-motion:reduce),(max-width:900px){
+  .washi{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .washi::-webkit-scrollbar{display:none}
+  .wtrack{animation:none}
+  .washi ul[aria-hidden]{display:none}
+}
+/* the Short page's video sits in a phone cut from paper (the SVG is drawn behind it) */
+.tv{padding:15% 6.5% 13.5%;background:none;box-shadow:none;filter:drop-shadow(0 16px 14px rgba(0,0,0,.35))}
+.tv .phone{position:absolute;inset:0;width:100%;height:100%}
+.tv .yt{z-index:1;border-radius:3px;overflow:hidden}
+.tv .tape{top:-8px;left:22%;rotate:-8deg;z-index:3}
+/* phones: tapping a polaroid opens a big preview first */
+.lb{width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;color:#fff4d6}
+.lb::backdrop{background:rgba(20,14,30,.9)}
+.lb figure{margin:0;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:64px 16px 24px}
+.lb .shot{width:min(78vw,calc((100svh - 230px)*.5625));aspect-ratio:9/16;object-fit:cover;background:#000;border:8px solid #fff8e8;rotate:-1deg;box-shadow:0 18px 30px -12px rgba(0,0,0,.7)}
+.lb figcaption{display:grid;justify-items:center;gap:12px;text-align:center;max-width:420px}
+.lb figcaption b{font:400 24px/1.05 "The Bold Font",sans-serif}
+.lb .btn{background:#FFD54A;color:#1d1a17}
+.lbx{position:absolute;top:12px;right:12px;width:48px;height:48px;border:0;border-radius:50%;background:#fff8e8;color:#2b2118;font-size:20px;font-weight:700;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.3)}
+/* home: small paper tabs hanging from the top edge (Shorts · Map · Corrections) */
+.tabs{position:absolute;top:0;right:max(28px,calc(50% - 700px));z-index:25;display:flex;gap:6px}
+.tabs a{display:flex;align-items:center;min-height:44px;padding:8px 16px 6px;background:#fff8e8;color:#2b2118;text-decoration:none;font-weight:700;font-size:15px;
+  border-radius:0 0 6px 8px;box-shadow:0 5px 8px -4px rgba(0,0,0,.45);transition:padding .15s}
+.tabs a:nth-child(2){background:#FFD54A;rotate:1deg}.tabs a:nth-child(3){background:#f3b7a6;rotate:-1deg}
+.tabs a:hover,.tabs a:focus-visible{padding-top:14px}
+/* tap targets, labels */
+.spin span{white-space:nowrap}
+.corkall{display:none}
+@media (max-width:900px){.corkall{display:block}}
+@media (max-width:900px){
+  .tabs{position:relative;right:auto;top:auto;justify-content:center;padding:64px 0 6px;background:#2b2118}
+  .tabs+#lab{padding-top:0}
+  .lanes a{display:inline-flex;align-items:center;min-height:44px}
+  .topnav .brand{display:inline-flex;align-items:center;min-height:44px}
+  .pn{min-height:64px}
+  .search input{min-height:44px}
+  .askrand{min-height:44px}
+  /* the hero cork's polaroids are too small to tap on a phone: the whole cork is one link down to the board of big cards */
+  .mini{pointer-events:none}
+  .corkall{position:absolute;inset:0;z-index:6;font-size:0;color:transparent}
 }
